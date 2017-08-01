@@ -30,13 +30,12 @@ class RockViewsTest(TestCase):
             specific_gravity='fake specific gravity'
             )
 
-
     def test_rock_index_view(self):
         resp = self.client.get(reverse('rocks:index'))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.rock, resp.context['rocks'])
 
     def test_rock_detail_view(self):
-        resp = self.client.get(reverse('rocks:detail', kwargs={'rock_name': 'Fake Name'}))
+        resp = self.client.get(reverse('rocks:detail', kwargs={'rock_name': self.rock.name}))
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(self.rock, resp.context['rock'])
+        self.assertContains(resp, 'Fake Name')
