@@ -15,7 +15,8 @@ def update_json():
             except:
                 continue
             try:
-                mydict['strunz_classification'] = mydict.pop('strunz classification')
+                mydict['strunz_classification'] =
+                mydict.pop('strunz classification')
             except:
                 continue
             try:

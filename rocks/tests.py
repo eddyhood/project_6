@@ -1,12 +1,13 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.utils import timezone
+
 
 from .models import Rock
 
 
 class RockViewsTest(TestCase):
     def setUp(self):
+        """Create a rock object for the following tests"""
         self.rock = Rock.objects.create(
             name='Fake name',
             image_filename='fake.jpg',
@@ -31,11 +32,16 @@ class RockViewsTest(TestCase):
             )
 
     def test_rock_index_view(self):
+        """Test that the index view returns a 200 status code and that the
+        rock created in setUp shows up in the view."""
         resp = self.client.get(reverse('rocks:index'))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.rock, resp.context['rocks'])
 
     def test_rock_detail_view(self):
-        resp = self.client.get(reverse('rocks:detail', kwargs={'rock_name': self.rock.name}))
+        """Test that the detail page returns a 200 response code and that the
+        rock create in setUp is displayed."""
+        resp = self.client.get(reverse('rocks:detail',
+                                       kwargs={'rock_name': self.rock.name}))
         self.assertEqual(resp.status_code, 200)
         self.assertContains(resp, 'Fake Name')
