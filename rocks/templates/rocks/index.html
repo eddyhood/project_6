@@ -18,7 +18,7 @@
       <ul class="minerals__container">
             {% for rock in rocks %}
                 <li class"minerals_item">
-                    <a href="#" class="minerals__anchor">{{rock}}</a>
+                    <a href="{% url 'detail' rock_name=rock.name %}" class="minerals__anchor">{{rock}}</a>
                 </li>
             {% endfor%}
         </ul>

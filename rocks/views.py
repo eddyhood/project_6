@@ -7,9 +7,9 @@ from .models import Rock
 
 def index(request):
     rocks = Rock.objects.all()
-
     return render(request, 'rocks/index.html', {'rocks': rocks})
 
 
-def detail(request):
-    return render(request, 'rocks/detail.html')
+def detail(request, rock_name):
+    get_rock = Rock.objects.get(name=rock_name)
+    return render(request, 'rocks/detail.html', {'rock': get_rock})
